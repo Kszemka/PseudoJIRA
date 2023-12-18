@@ -10,7 +10,7 @@ import (
 
 func ExecuteGetBugsQuery() ([]models.Task, error) {
 	db := config.GetDbConnection()
-	var tasks []models.Task
+	tasks := []models.Task{}
 
 	result, err := database.RunQuery(db, database.GET_TASKS_QUERY, map[string]any{"category": "Bug"})
 	if err != nil {

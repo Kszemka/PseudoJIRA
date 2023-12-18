@@ -371,7 +371,7 @@ const HomePage = () => {
       const selectedTask = taskList.find((task) => task.name === edittaskName);
 
       if (!selectedTask) {
-        console.error(`Task with ID ${edittaskName} not found`);
+        console.error(`Task ${edittaskName} not found`);
         return;
       }
 
@@ -422,12 +422,12 @@ const HomePage = () => {
       const selectedTask = taskList.find((task) => task.name === edittaskName);
 
       if (!selectedTask) {
-        console.error(`Task with ID ${edittaskName} not found`);
+        console.error(`Task ${edittaskName} not found`);
         return;
       }
 
       const requestBody = JSON.stringify({
-        taskId: selectedTask.id,
+        taskName: selectedTask.name,
         name: newName,
         description: newDescription,
       });
@@ -464,7 +464,14 @@ const HomePage = () => {
         ) : (
           userList.map((user) => (
             <div className="list" key={user.username}>
-              {/* ... (user details and buttons) */}
+              <p> {user.username}</p>
+              <p> {user.name} {user.surname} </p>
+              <button onClick={() => handleShowTasksClick(user.username)}>
+                Show Assigned
+              </button>
+              <button onClick={() => handleShowReportedClick(user.username)}>
+                Show Reported
+              </button>
             </div>
           ))
         )}
@@ -473,14 +480,14 @@ const HomePage = () => {
           <div className="modal-overlay">
             <div className="modal">
               <h4>Tasks for User: {selectedUsername}</h4>
-              {tasksForUser.length === 0 ? (
-                <p>No tasks for this user.</p>
-              ) : (
-                <ul>
-                  {tasksForUser.map((task) => (
+              {tasksForUser? (
+                  <ul>
+                    {tasksForUser.map((task) => (
                     <li key={task.name}>{task.name}</li>
-                  ))}
-                </ul>
+                    ))}
+                  </ul>
+              ) : (
+                <p>No tasks for this user.</p>
               )}
               <button onClick={handleExitTasksView}>Exit</button>
             </div>

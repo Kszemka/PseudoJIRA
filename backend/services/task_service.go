@@ -17,7 +17,7 @@ func ExecuteGetAllAssignedQuery() (any, error) {
 		return nil, err
 	}
 	var task models.Task
-	var tasks []models.Task
+	tasks := []models.Task{}
 
 	for result.Next(db.Ctx) {
 		mergedRecord := result.Record()
@@ -39,7 +39,7 @@ func ExecuteGetAllNotAssignedQuery() (any, error) {
 		return nil, err
 	}
 	var task models.Task
-	var tasks []models.Task
+	tasks := []models.Task{}
 
 	for result.Next(db.Ctx) {
 		mergedRecord := result.Record()

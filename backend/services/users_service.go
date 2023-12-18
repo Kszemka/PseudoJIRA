@@ -12,7 +12,7 @@ import (
 
 func ExecuteGetUsersQuery() ([]models.User, error) {
 	db := config.GetDbConnection()
-	var users []models.User
+	users := []models.User{}
 
 	result, err := database.RunQuery(db, database.GET_USERS_QUERY, nil)
 	if err != nil {
@@ -47,7 +47,7 @@ func ExecuteAssignTaskToUser(params models.TaskWithAssignedUser) error {
 
 func ExecuteShowUsersTasks(user models.User, option string) ([]models.Task, error) {
 	db := config.GetDbConnection()
-	var tasks []models.Task
+	tasks := []models.Task{}
 
 	data := map[string]any{}
 	data["username"] = user.Username

@@ -1,4 +1,4 @@
-version: latest
+version: '3'
 
 services:
   frontend:
@@ -14,3 +14,9 @@ services:
       context: ./backend
     ports:
       - "8080:8080"
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    command: http frontend:3000
+    depends_on:
+      - frontend

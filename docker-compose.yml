@@ -20,3 +20,5 @@ services:
     command: http frontend:3000
     depends_on:
       - frontend
+    environment:
+      - NGROK_AUTHTOKEN=2ZmQ9ZIp7b7oDRTDMhBM3vScdzd_28UJ5pQ442aUCGJeCFnv7

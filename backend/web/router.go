@@ -5,16 +5,20 @@ import (
 	"fmt"
 	"github.com/gorilla/handlers"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 )
 
 func HttpRouter() {
 
+	certFile := os.Getenv("TLS_CERT_PATH")
+	keyFile := os.Getenv("TLS_KEY_PATH")
+
 	corsHandler := handlers.CORS(
 		handlers.AllowedHeaders([]string{"Content-Type", "Authorization"}),
 		handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"}),
-		handlers.AllowedOrigins([]string{"*"}), // Adjust as needed for your setup
+		handlers.AllowedOrigins([]string{"*"}),
 	)
 
 	router := mux.NewRouter()
@@ -33,6 +37,5 @@ func HttpRouter() {
 	router.HandleFunc("/getReportedTasks", controllers.GetReportedTasks).Methods("POST")
 
 	http.Handle("/", corsHandler(router))
-	fmt.Println("Server is running on :8080")
-	http.ListenAndServe(":8080", nil)
-}
+	fmt.Println("Server is running on :8443")
+	http.ListenAndServeTLS(":8443", certFile, keyFile, nil)}

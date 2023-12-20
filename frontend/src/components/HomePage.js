@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import './HomePage.css'; // Import the CSS file for styling
+import './HomePage.css';
 
 const HomePage = () => {
     const [selectedTab, setSelectedTab] = useState('');
@@ -29,16 +29,16 @@ const HomePage = () => {
 
     const fetchTaskList = useCallback(async () => {
         try {
-          let endpoint = 'http://localhost:8080/all';
+          let endpoint = 'https://192.168.0.191:8443/all';
       
           if (filterByBug) {
-            endpoint = 'http://localhost:8080/bugs';
+            endpoint = 'https://192.168.0.191:8443/bugs';
           } else if (filterByFeature) {
-            endpoint = 'http://localhost:8080/features';
+            endpoint = 'https://192.168.0.191:8443/features';
           } else if (filterByAssigned) {
-            endpoint = 'http://localhost:8080/assigned';
+            endpoint = 'https://192.168.0.191:8443/assigned';
           } else if (filterByUnassigned) {
-            endpoint = 'http://localhost:8080/unassigned';
+            endpoint = 'https://192.168.0.191:8443/unassigned';
           }
       
           const response = await fetch(endpoint);
@@ -61,7 +61,7 @@ const HomePage = () => {
 
   const fetchUserList = async () => {
     try {
-      const response = await fetch('http://localhost:8080/users');
+      const response = await fetch('https://192.168.0.191:8443/users');
       if (response.ok) {
         const data = await response.json();
         setUserList(data);
@@ -291,7 +291,7 @@ const HomePage = () => {
         User: { username: createTaskReporter}
       });
 
-      const response = await fetch('http://localhost:8080/createTask', {
+      const response = await fetch('https://192.168.0.191:8443/createTask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -301,7 +301,6 @@ const HomePage = () => {
 
       if (response.ok) {
         console.log('Task created successfully');
-        // Reload the task list after creation
         fetchTaskList();
       } else {
         console.error('Failed to create task');
@@ -336,7 +335,7 @@ const HomePage = () => {
         Task: { name: selectedTask.name },
       });
 
-      const response = await fetch(`http://localhost:8080/assignTask`, {
+      const response = await fetch(`https://192.168.0.191:8443/assignTask`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -379,7 +378,7 @@ const HomePage = () => {
         name: selectedTask.name,
       });
 
-      const response = await fetch(`http://localhost:8080/deleteTask`, {
+      const response = await fetch(`https://192.168.0.191:8443/deleteTask`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -432,7 +431,7 @@ const HomePage = () => {
         description: newDescription,
       });
 
-      const response = await fetch(`http://localhost:8080/updateTask`, {
+      const response = await fetch(`https://192.168.0.191:8443/updateTask`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -501,7 +500,7 @@ const HomePage = () => {
         try {
           const requestBody = JSON.stringify({ "username": username });
     
-          const response = await fetch('http://localhost:8080/getUsersTasks', {
+          const response = await fetch('https://192.168.0.191:8443/getUsersTasks', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -526,7 +525,7 @@ const HomePage = () => {
         try {
           const requestBody = JSON.stringify({ "username": username });
     
-          const response = await fetch('http://localhost:8080/getReportedTasks', {
+          const response = await fetch('https://192.168.0.191:8443/getReportedTasks', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -557,7 +556,6 @@ const HomePage = () => {
   return (
     <div>
       <h2>Projekt 'Przetwarzanie danych w chmurach obliczeniowych - Krzeminska' 2023</h2>
-      {/* You can use a Tab component or any other UI for tab navigation */}
       <div>
         <button onClick={() => handleTabClick('task')}>Task List</button>
         <button onClick={() => handleTabClick('users')}>User List</button>

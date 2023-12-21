@@ -116,5 +116,5 @@ The component supports basic CRUD (Create, Read, Update, Delete) operations for 
 
 ## Demo
 
-**in progress**
+![App demo](/images/demo.gif)
 

@@ -70,3 +70,16 @@ func ExecuteShowUsersTasks(user models.User, option string) ([]models.Task, erro
 
 	return tasks, nil
 }
+
+func ExecuteUnassignTask(params models.TaskWithAssignedUser) error {
+	db := config.GetDbConnection()
+
+	data := map[string]any{}
+	data["username"] = params.User.Username
+	data["name"] = params.Task.Name
+
+	log.Println(data)
+	_, err := database.RunQuery(db, database.UNASSIGN_TASK, data)
+
+	return err
+}

@@ -6,7 +6,7 @@ services:
       context: ./backend
     container_name: backend
     ports:
-      - "8080:8080"
+      - 8080:8080
 
   frontend:
     build:
@@ -18,10 +18,10 @@ services:
     depends_on:
       - backend
 
-  # ngrok:
-  #   image: ngrok/ngrok:latest
-  #   command: http frontend:3000
-  #   depends_on:
-  #     - frontend
-  #   environment:
-  #     - NGROK_AUTHTOKEN=2ZmQ9ZIp7b7oDRTDMhBM3vScdzd_28UJ5pQ442aUCGJeCFnv7
+  ngrok:
+    image: ngrok/ngrok:latest
+    command: http frontend:80 --domain bream-promoted-scarcely.ngrok-free.app
+    depends_on:
+      - frontend
+    environment:
+      - NGROK_AUTHTOKEN=2ZmQ9ZIp7b7oDRTDMhBM3vScdzd_28UJ5pQ442aUCGJeCFnv7

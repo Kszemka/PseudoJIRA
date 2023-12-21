@@ -114,7 +114,16 @@ React hooks are functions that enable functional components to have state and li
 The component supports basic CRUD (Create, Read, Update, Delete) operations for tasks. Users can create new tasks, edit existing tasks, assign tasks to users, and delete tasks. These operations involve making corresponding API requests to the backend.
 
 
+## Environment
+
+The project is designed to run as a set of Docker containers, each handling specific functionalities of the application. The system consists of two main containers: one for the frontend and the other for the backend. Additionally, an Ngrok container is utilized for exposing the local development environment to the internet.
+
+The frontend is served by an Nginx web server. The Dockerfile for the frontend specifies the build process of Node.js, and the resulting static files are served by Nginx. Nginx acts as a reverse proxy to efficiently route incoming requests between the frontend and backend containers. 
+The Nginx server is configured to listen on port 80, the default HTTP port. Requests to the root path are directed to the static files in the frontend container, facilitating the presentation layer. Meanwhile, requests to the /api path are forwarded to the backend container, allowing seamless communication between the frontend and backend services.
+
+This configuration ensures an organized and efficient distribution of responsibilities, with Nginx serving as a gateway between the user interface and application logic.
+
+
 ## Demo
 
-**in progress**
-
+![App demo](/images/demo.gif)

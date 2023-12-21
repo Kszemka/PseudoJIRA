@@ -13,10 +13,17 @@ The primary objective of this project was: firstly, to craft a user-friendly app
 - explore all tasks assigned to a particular user and those tasks reported by the chosen user.
 
 
+### Navigation
+- [Database section](#Database)
+- [Backend section](#Backend)
+- [Frontend section](#Frontend)
+- [Environment section](#Environment)
+- [Installation section](#Local-Installation)
 
 
 
 ## Implementation
+
 
 ### Database
 
@@ -103,6 +110,7 @@ The `web` package houses all the logic related to handling HTTP requests for eac
 In essence, the backend uses the Gorilla Mux router for routing HTTP requests and the Neo4j Go driver for database connectivity. The logical components (entities, controllers, and services) collaborate to provide a seamless and modular structure for handling HTTP requests and interacting with the Neo4j database. 
 The separation of concerns is evident in the distinct packages, enhancing code organization and maintainability.
 
+
 ### Frontend
 
 Frontend, which was created with React.js, is SPA (Single Page Application). SPAs load a single HTML page and dynamically update the content as the user interacts with the application, without requiring a full page reload. In this case, the component handles the rendering of either a task list or a user list based on the selected tab.
@@ -114,6 +122,7 @@ React hooks are functions that enable functional components to have state and li
 The component supports basic CRUD (Create, Read, Update, Delete) operations for tasks. Users can create new tasks, edit existing tasks, assign tasks to users, and delete tasks. These operations involve making corresponding API requests to the backend.
 
 
+
 ## Environment
 
 The project is designed to run as a set of Docker containers, each handling specific functionalities of the application. The system consists of two main containers: one for the frontend and the other for the backend. Additionally, an Ngrok container is utilized for exposing the local development environment to the internet.
@@ -122,6 +131,44 @@ The frontend is served by an Nginx web server. The Dockerfile for the frontend s
 The Nginx server is configured to listen on port 80, the default HTTP port. Requests to the root path are directed to the static files in the frontend container, facilitating the presentation layer. Meanwhile, requests to the /api path are forwarded to the backend container, allowing seamless communication between the frontend and backend services.
 
 This configuration ensures an organized and efficient distribution of responsibilities, with Nginx serving as a gateway between the user interface and application logic.
+
+
+
+## Local Installation
+
+Before proceeding with the installation, make sure that you have Docker installed on your development machine.
+
+1. Clone the Repository
+
+Begin by cloning the project repository to your local machine:
+
+```bash
+git clone <repository-url> 
+cd <repository-directory> 
+```
+
+2. Configure Ngrok (Optional)
+
+If you wish to expose your local environment to the internet using Ngrok, modify the Ngrok configuration in the docker-compose.yml file according to your preferences.
+
+3. Run Docker Compose
+
+Execute the following command to start the application using Docker Compose:
+
+```bash
+docker-compose up --build -d 
+```
+
+This command will launch the backend, frontend (and Ngrok) containers, ensuring that they communicate properly.
+
+4. Access the Application
+
+Once the containers are running, you can access the application through your web browser on http://localhost.
+
+5. Ngrok (Optional)
+
+If you configured Ngrok, the application will also be accessible via the Ngrok domain.
+
 
 
 ## Demo

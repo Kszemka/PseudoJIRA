@@ -9,11 +9,8 @@ RUN go mod download
 
 COPY . .
 
-COPY ./certs/cert.pem /app
-COPY ./certs/key.pem /app
-
 RUN go build -o main .
 
-EXPOSE 8443
+EXPOSE 8080
 
 CMD ["./main"]

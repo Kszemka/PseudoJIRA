@@ -29,20 +29,20 @@ const HomePage = () => {
 
     const fetchTaskList = useCallback(async () => {
         try {
-          let endpoint = 'https://192.168.0.191:8443/all';
+          let endpoint = '/api/all';
       
           if (filterByBug) {
-            endpoint = 'https://192.168.0.191:8443/bugs';
+            endpoint = '/api/bugs';
           } else if (filterByFeature) {
-            endpoint = 'https://192.168.0.191:8443/features';
+            endpoint = '/api/features';
           } else if (filterByAssigned) {
-            endpoint = 'https://192.168.0.191:8443/assigned';
+            endpoint = '/api/assigned';
           } else if (filterByUnassigned) {
-            endpoint = 'https://192.168.0.191:8443/unassigned';
+            endpoint = '/api/unassigned';
           }
       
-          const response = await fetch(endpoint);
-      
+          const response = await fetch(`${endpoint}`);
+
           if (response.ok) {
             const data = await response.json();
             setTaskList(data);
@@ -61,7 +61,7 @@ const HomePage = () => {
 
   const fetchUserList = async () => {
     try {
-      const response = await fetch('https://192.168.0.191:8443/users');
+      const response = await fetch('/api/users');
       if (response.ok) {
         const data = await response.json();
         setUserList(data);
@@ -291,7 +291,7 @@ const HomePage = () => {
         User: { username: createTaskReporter}
       });
 
-      const response = await fetch('https://192.168.0.191:8443/createTask', {
+      const response = await fetch('/api/createTask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -335,7 +335,7 @@ const HomePage = () => {
         Task: { name: selectedTask.name },
       });
 
-      const response = await fetch(`https://192.168.0.191:8443/assignTask`, {
+      const response = await fetch(`/api/assignTask`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -378,7 +378,7 @@ const HomePage = () => {
         name: selectedTask.name,
       });
 
-      const response = await fetch(`https://192.168.0.191:8443/deleteTask`, {
+      const response = await fetch(`/api/deleteTask`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -431,7 +431,7 @@ const HomePage = () => {
         description: newDescription,
       });
 
-      const response = await fetch(`https://192.168.0.191:8443/updateTask`, {
+      const response = await fetch(`/api/updateTask`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -500,7 +500,7 @@ const HomePage = () => {
         try {
           const requestBody = JSON.stringify({ "username": username });
     
-          const response = await fetch('https://192.168.0.191:8443/getUsersTasks', {
+          const response = await fetch('/api/getUsersTasks', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -525,7 +525,7 @@ const HomePage = () => {
         try {
           const requestBody = JSON.stringify({ "username": username });
     
-          const response = await fetch('https://192.168.0.191:8443/getReportedTasks', {
+          const response = await fetch('/api/getReportedTasks', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

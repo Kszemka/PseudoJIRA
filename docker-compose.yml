@@ -1,27 +1,27 @@
 version: '3'
 
 services:
-  frontend:
-    build:
-      context: ./frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-
   backend:
     build:
       context: ./backend
+    container_name: backend
     ports:
-      - "8443:8443" 
-    environment:
-      - "TLS_CERT_PATH=/app/certs/cert.pem"
-      - "TLS_KEY_PATH=/app/certs/key.pem" 
+      - "8080:8080"
 
-  ngrok:
-    image: ngrok/ngrok:latest
-    command: http frontend:3000
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    container_name: frontend
     depends_on:
-      - frontend
-    environment:
-      - NGROK_AUTHTOKEN=2ZmQ9ZIp7b7oDRTDMhBM3vScdzd_28UJ5pQ442aUCGJeCFnv7
+      - backend
+
+  # ngrok:
+  #   image: ngrok/ngrok:latest
+  #   command: http frontend:3000
+  #   depends_on:
+  #     - frontend
+  #   environment:
+  #     - NGROK_AUTHTOKEN=2ZmQ9ZIp7b7oDRTDMhBM3vScdzd_28UJ5pQ442aUCGJeCFnv7

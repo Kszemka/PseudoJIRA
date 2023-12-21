@@ -26,6 +26,7 @@ func HttpRouter() {
 	router.HandleFunc("/api/assignTask", controllers.AssignTask).Methods("POST")
 	router.HandleFunc("/api/getUsersTasks", controllers.GetUsersTasks).Methods("POST")
 	router.HandleFunc("/api/getReportedTasks", controllers.GetReportedTasks).Methods("POST")
+	router.HandleFunc("/api/unassignTask", controllers.UnassignTask).Methods("POST")
 
 	handler := cors.Default().Handler(router)
 

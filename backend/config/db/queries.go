@@ -16,6 +16,8 @@ const UPDATE_TASK_QUERY = `MATCH (t:TASK) WHERE t.name = $taskName SET t.name = 
 const DELETE_TASK_QUERY = `MATCH (t:TASK)-[r]-() WHERE t.name = $name DELETE r, t`
 const GET_USERS_QUERY = `MATCH (user:USER) RETURN user;`
 const GET_TASKS_FOR_USER = `MATCH (user:USER {username: $username})-[:%s]->(task:TASK) return task`
+const UNASSIGN_TASK = `MATCH (user:USER {username: $username})-[assign:ASSIGN]->(task:TASK {name:$name})
+						WHERE (user)-[:ASSIGN]->(task) DELETE assign;`
 
 func RunCreateQuery(con *config.Connection, task models.Task, user models.User) (any, error) {
 	session := con.Driver.NewSession(con.Ctx, neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite})
